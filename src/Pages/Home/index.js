@@ -3,7 +3,7 @@ import { ProductCard } from "../../Components/ProductCard";
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProducts } from "../../store/slices/productsSlice";
-import { setFilteredProducts, setSearchQuery, setIsSearching } from "../../store/slices/searchSlice";
+import { setFilteredProducts, setSearchQuery } from "../../store/slices/searchSlice";
 import { smartFilterProducts } from "../../utils/smartFilter";
 
 export const Home = () => {
@@ -13,7 +13,7 @@ export const Home = () => {
 
     useEffect(() => {
         dispatch(fetchAllProducts());
-    }, [dispatch]);
+    }, [dispatch, fetchAllProducts]);
 
     // Filter products based on search query using smart filtering
     const filteredProducts = useMemo(() => {
@@ -60,7 +60,7 @@ export const Home = () => {
                         <div>
                             <h1 className="text-3xl font-bold mb-2">Search Results</h1>
                             <p className="text-gray-600">
-                                {displayProducts.length} result{displayProducts.length !== 1 ? 's' : ''} found for "{searchQuery}"
+                                {displayProducts.length} result{displayProducts.length !== 1 ? 's' : ''} found for &quot;{searchQuery}&quot;
                             </p>
                         </div>
                     ) : (

@@ -89,19 +89,20 @@ export const Signup = () => {
     }
 
     try {
-      const result = await dispatch(signupUser({
-        email: formData.email,
-        password: formData.password,
-        firstName: formData.firstName,
-        lastName: formData.lastName
-      }));
+      const result = await dispatch(
+        signupUser({
+          email: formData.email,
+          password: formData.password,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+        })
+      );
 
       if (signupUser.fulfilled.match(result)) {
-        // Signup successful, redirect to home
         navigate('/');
       }
-    } catch (error) {
-      console.error('Signup error:', error);
+    } catch (err) {
+      console.error('Signup error:', err); // eslint-disable-line no-console
     }
   };
 

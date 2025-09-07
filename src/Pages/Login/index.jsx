@@ -66,17 +66,18 @@ export const Login = () => {
     }
 
     try {
-      const result = await dispatch(loginUser({
-        email: formData.email,
-        password: formData.password
-      }));
+      const result = await dispatch(
+        loginUser({
+          email: formData.email,
+          password: formData.password,
+        })
+      );
 
       if (loginUser.fulfilled.match(result)) {
-        // Login successful, redirect to home
         navigate('/');
       }
-    } catch (error) {
-      console.error('Login error:', error);
+    } catch (err) {
+      console.error('Login error:', err); // eslint-disable-line no-console
     }
   };
 

@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useState } from 'react';
 import { setSearchQuery, setIsSearching, addToSearchHistory } from '../../store/slices/searchSlice';
 import { logoutUser } from '../../store/slices/authSlice';
 
@@ -50,10 +50,11 @@ export const Navbar = () => {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        if (searchInput.trim()) {
-            dispatch(setSearchQuery(searchInput.trim()));
+        const trimmedInput = searchInput.trim();
+        if (trimmedInput) {
+            dispatch(setSearchQuery(trimmedInput));
             dispatch(setIsSearching(true));
-            dispatch(addToSearchHistory(searchInput.trim()));
+            dispatch(addToSearchHistory(trimmedInput));
             navigate('/');
         }
     };
@@ -103,6 +104,10 @@ export const Navbar = () => {
                                 : 'hover:bg-white hover:bg-opacity-20 hover:text-white'
                         }`}
                         onClick={() => navigate('/')}
+                        onKeyDown={(e) => e.key === 'Enter' && navigate('/')}
+                        role="button"
+                        tabIndex={0}
+                        aria-label="Home"
                     >
                         <span className="material-symbols-outlined text-2xl">
                             home
